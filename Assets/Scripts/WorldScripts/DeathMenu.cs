@@ -14,6 +14,8 @@ public class DeathMenu : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(sceneBuildIndex);
+        GameManager gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        gameManager.gameState = GameManager.GameState.Gameplay;
     }
     public void QuitGame()
     {

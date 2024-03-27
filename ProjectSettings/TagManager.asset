@@ -11,6 +11,9 @@ TagManager:
   - FullBody
   - CrouchBody
   - Checkpoint
+  - Enemy
+  - ActiveState
+  - GameManager
   layers:
   - Default
   - TransparentFX

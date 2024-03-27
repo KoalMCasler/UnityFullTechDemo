@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using TMPro;
+using JetBrains.Annotations;
 
 
 public class PlayerController : MonoBehaviour
@@ -18,11 +19,12 @@ public class PlayerController : MonoBehaviour
     private string coinsText;
     private GameObject player;
     //private Rigidbody playerRB;
-    public GameObject PlayerSpawner;
+    //public GameObject PlayerSpawner;
     public int health;
     public int lives;
     public int conins;
-    public int sceneBuildIndex;
+    public LevelManager levelManager;
+    public GameManager gameManager;
     //private Transform reSpawnTransform;
     // Start is called before the first frame update
     void Awake()
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour
         player = this.gameObject;
         //playerRB = this.GetComponent<Rigidbody>(); 
         //reSpawnTransform = this.transform;
-        PlayerSpawner = GameObject.FindWithTag("PlayerSpawner");
+        //PlayerSpawner = GameObject.FindWithTag("PlayerSpawner");
     }
     void Start()
     {
@@ -45,20 +47,16 @@ public class PlayerController : MonoBehaviour
         {
             Respawn();
         }
-        if(health <= 0 && lives <= 0)
-        {
-            SceneManager.LoadScene(sceneBuildIndex);
-        }
-    }
-    void OnDestroy()
-    {
-        PlayerSpawner.GetComponent<PlayerSpawner>().ReSpawnPlayer();
     }
     void Respawn()
     {
         player.GetComponent<PlayerTeleport>().Respawn();
         health = 10; 
         lives -= 1;
+        if(lives <= 0)
+        {
+            gameManager.gameState = GameManager.GameState.GameOver;
+        }
     }
     void HUDUpdate()
     {

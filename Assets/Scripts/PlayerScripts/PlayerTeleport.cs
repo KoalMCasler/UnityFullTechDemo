@@ -9,12 +9,13 @@ public class PlayerTeleport : MonoBehaviour
     private GameObject currentTeleport;
     [SerializeField]
     public GameObject activeCheckpoint;
+    public GameObject PrevCheckpoint;
     public float TransitionTime = 0.3f;
     [SerializeField]
     private GameObject player;
     [SerializeField]
     private GameObject playerSpawnPosition; 
-    public PlayerController playerController;  
+    public PlayerController playerController; 
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -29,14 +30,20 @@ public class PlayerTeleport : MonoBehaviour
     //     }
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
         // grabs destination on entering location of tagged object.
-        if (collision.CompareTag("Checkpoint"))
+        if (other.CompareTag("Checkpoint"))
         {
-            activeCheckpoint = collision.gameObject;
+            if(other != activeCheckpoint && activeCheckpoint != null)
+            {
+                PrevCheckpoint = activeCheckpoint;
+            }
+            activeCheckpoint = other.gameObject;
+            PrevCheckpoint.GetComponent<Checkpoint>().IsActiveCheckpoint = false;
+            activeCheckpoint.GetComponent<Checkpoint>().IsActiveCheckpoint = true;   
         }
-        if (collision.CompareTag("KillBox"))
+        if (other.CompareTag("KillBox"))
         {
             Debug.Log("Player touched kill box");
             currentTeleport = playerSpawnPosition;
@@ -44,12 +51,12 @@ public class PlayerTeleport : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit(Collider other)
     {
         // nulls destination on exit of area to prevent teleport when not over object
-        if (collision.CompareTag("Teleport"))
+        if (other.CompareTag("Teleport"))
         {
-            if (collision.gameObject == currentTeleport)
+            if (other.gameObject == currentTeleport)
             {
                 currentTeleport = null;
             }

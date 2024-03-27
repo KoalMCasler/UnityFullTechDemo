@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    public bool IsActiveCheckpoint;
+    public Material mat1;
+    public Material mat2;
+    public List<Material> MList1;
+    public List<Material> MList2;
+    void Start()
     {
-        if(other.CompareTag("Player"))
+        IsActiveCheckpoint = false;
+        MList1.Add(mat1);
+        MList2.Add(mat2);
+    }
+
+    void Update()
+    {
+        if(IsActiveCheckpoint)
         {
-            other.GetComponent<PlayerTeleport>().activeCheckpoint = this.gameObject;
+            this.GetComponent<MeshRenderer>().SetMaterials(MList1);
         }
+        if(!IsActiveCheckpoint)
+        {
+            this.GetComponent<MeshRenderer>().SetMaterials(MList2);
+        } 
     }
 }

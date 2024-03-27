@@ -22,6 +22,8 @@ public class FPS : MonoBehaviour
     [SerializeField]
     private GameObject HUD;
     [SerializeField]
+    public GameObject AIHUD;
+    [SerializeField]
     private GameObject pauseMenu;
     private bool GameIsPaused;
     [Header("Movement Settings")]

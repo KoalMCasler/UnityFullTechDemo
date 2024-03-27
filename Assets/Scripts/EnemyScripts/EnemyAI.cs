@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Object References")]
     public Material enemyHead;
     public GameObject player;
-    public TextMeshProUGUI activeStateHUD;
+    //public TextMeshProUGUI activeStateHUD;
     [Header("Pathfinding")]
     public NavMeshAgent agent;
     [SerializeField]
@@ -62,31 +62,31 @@ public class EnemyAI : MonoBehaviour
     {
         enemyHead.SetColor("_Color", PatrolColor);
         RunPatrol();
-        activeStateHUD.text = "Patrolling";
+        //activeStateHUD.text = "Patrolling";
     }
     void Chasing()
     {
         enemyHead.SetColor("_Color", ChaseColor);
         ChasePlayer();
-        activeStateHUD.text = "Chasing";
+        //activeStateHUD.text = "Chasing";
     }
     void Searching()
     {
         enemyHead.SetColor("_Color", SearchColor);
         SearchForPlayer();
-        activeStateHUD.text = "Searching";
+        //activeStateHUD.text = "Searching";
     }
     void Attacking()
     {
         enemyHead.SetColor("_Color", AttackColor);
         AttackPlayerInRange();
-        activeStateHUD.text = "Attacking";
+        //activeStateHUD.text = "Attacking";
     }
     void Retreating()
     {
         enemyHead.SetColor("_Color", RetreatColor);   
         StartRetreat();
-        activeStateHUD.text = "Retreating";
+        //activeStateHUD.text = "Retreating";
     }
 
     void RunPatrol()
