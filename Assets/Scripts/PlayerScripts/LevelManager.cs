@@ -28,11 +28,20 @@ public class LevelManager : MonoBehaviour
         {
             gameManager.gameState = GameManager.GameState.Gameplay;
         }
+        if(sceneName == "DemoShootingRange")
+        {
+            player.GetComponent<ArmCannon>().armCannonIsActive = true;
+        }
+        else
+        {
+            player.GetComponent<ArmCannon>().armCannonIsActive = false;
+        }
         SceneManager.LoadScene(sceneName);
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         spawnPoint = GameObject.FindWithTag("PlayerSpawner");
+        player.transform.rotation = spawnPoint.transform.rotation;
         player.transform.position = spawnPoint.transform.position;
     }
 }

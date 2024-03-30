@@ -14,8 +14,10 @@ public class ArmCannon : MonoBehaviour
     private Transform playerTransform;
     private GameObject player;
     private FPS playerFPS;
+    public bool armCannonIsActive;
     void Start()
     {
+        armCannonIsActive = false;
         player = GameObject.FindWithTag("Player");
         playerTransform = this.GetComponent<Transform>();
         playerFPS = player.GetComponent<FPS>();
@@ -25,23 +27,23 @@ public class ArmCannon : MonoBehaviour
         }
 
     }
-    // void OnFire()
-    // {
-    //     if(playerFPS.inputIsEnalbled)
-    //     {
-    //         if(bulletIsAlive != true)
-    //         {
-    //             bulletIsAlive = true;
-    //             bullet = GameObject.Instantiate(projectile, armCannon.transform.position,bulletRotation);
-    //             bulletRB = bullet.GetComponent<Rigidbody>();
-    //             bulletRB.AddForce(armCannon.transform.up*BulletForce, ForceMode.Impulse);
-    //         }
-    //         else
-    //         {
-    //             Destroy(bullet);
-    //         }    
-    //     }
-    // }
+    void OnFire()
+    {
+        if(playerFPS.inputIsEnalbled && armCannonIsActive)
+        {
+            if(bulletIsAlive != true)
+            {
+                bulletIsAlive = true;
+                bullet = GameObject.Instantiate(projectile, armCannon.transform.position,bulletRotation);
+                bulletRB = bullet.GetComponent<Rigidbody>();
+                bulletRB.AddForce(armCannon.transform.up*BulletForce, ForceMode.Impulse);
+            }
+            else
+            {
+                Destroy(bullet);
+            }    
+        }
+    }
     void Update()
     {
         bulletRotation = playerTransform.rotation;
