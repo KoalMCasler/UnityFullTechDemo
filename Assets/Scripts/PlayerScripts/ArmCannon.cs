@@ -15,6 +15,7 @@ public class ArmCannon : MonoBehaviour
     private GameObject player;
     private FPS playerFPS;
     public bool armCannonIsActive;
+    public AudioSource gunSFX;
     void Start()
     {
         armCannonIsActive = false;
@@ -33,6 +34,7 @@ public class ArmCannon : MonoBehaviour
         {
             if(bulletIsAlive != true)
             {
+                gunSFX.Play();
                 bulletIsAlive = true;
                 bullet = GameObject.Instantiate(projectile, armCannon.transform.position,bulletRotation);
                 bulletRB = bullet.GetComponent<Rigidbody>();
