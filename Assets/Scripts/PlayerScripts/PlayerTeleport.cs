@@ -18,6 +18,7 @@ public class PlayerTeleport : MonoBehaviour
     public PlayerController playerController; 
     void Start()
     {
+        PrevCheckpoint = null;
         player = GameObject.FindWithTag("Player");
         playerSpawnPosition = GameObject.FindWithTag("PlayerSpawner");
     }

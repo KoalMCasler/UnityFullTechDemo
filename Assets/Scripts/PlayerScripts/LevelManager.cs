@@ -40,6 +40,7 @@ public class LevelManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        player.GetComponent<PlayerTeleport>().PrevCheckpoint = null;
         spawnPoint = GameObject.FindWithTag("PlayerSpawner");
         player.transform.rotation = spawnPoint.transform.rotation;
         player.transform.position = spawnPoint.transform.position;
