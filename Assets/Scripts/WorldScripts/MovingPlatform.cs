@@ -57,6 +57,6 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        other.transform.SetParent(null);
+        other.transform.SetParent(FindObjectOfType<GameManager>().transform);
     }
 }
